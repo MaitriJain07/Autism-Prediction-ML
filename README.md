@@ -7,7 +7,7 @@ This project builds a machine learning model to predict the likelihood of Autism
 ##  Project Overview
 - **Objective:** Predict Autism diagnosis using ML classification techniques.  
 - **Tools Used:** Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, Google Colab  
-- **Dataset:** Autism Screening Adult Dataset (UCI / Kaggle)  
+- **Dataset:** Autism Screening Adult Dataset (UCI)  
 
 ---
 
