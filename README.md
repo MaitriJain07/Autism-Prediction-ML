@@ -1,49 +1,124 @@
 # Autism Prediction using Machine Learning
 
-This project builds a machine learning model to predict the likelihood of Autism Spectrum Disorder (ASD) using behavioral and screening data. The model analyzes user responses and key clinical indicators to assist in early screening and decision support.
+This project aims to predict the likelihood of Autism Spectrum Disorder (ASD) based on screening responses and demographic data.
+It applies data preprocessing, exploratory data analysis (EDA), and multiple classification models (Decision Tree, Random Forest, and XGBoost) with hyperparameter optimization to identify the most accurate predictive model.
 
 ---
 
-##  Project Overview
-- **Objective:** Predict Autism diagnosis using ML classification techniques.  
-- **Tools Used:** Python, Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, Google Colab  
-- **Dataset:** Autism Screening Adult Dataset (UCI)  
+## Project Overview
+
+* **Goal:** To develop a machine learning model that can predict potential Autism Spectrum Disorder (ASD) traits from screening data.
+* **Techniques Used:**
+
+  * Exploratory Data Analysis (EDA)
+  * Label Encoding
+  * Outlier Detection and Handling
+  * Class Imbalance Correction using SMOTE
+  * Model Training & Evaluation
+  * Hyperparameter Tuning using RandomizedSearchCV
+* **Algorithms:**
+
+  * Decision Tree
+  * Random Forest
+  * XGBoost
 
 ---
 
-## ⚙️ Methodology
-1. **Data Preprocessing** – Handling missing values, encoding categorical data  
-2. **Exploratory Data Analysis (EDA)** – Visualizing correlations and feature distributions  
-3. **Model Building** – Logistic Regression, Random Forest, and SVM models trained  
-4. **Evaluation** – Accuracy, Precision, Recall, F1-Score, and ROC curve used for evaluation  
-5. **Result** – Random Forest achieved the best accuracy (~94%)  
+## Dataset
+
+**Name:** Autism Screening Adult Data Set
+**Source:** [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Autism+Screening+Adult)
+**Description:**
+The dataset contains behavioral and personal attributes of adults who took an autism screening test.
+It includes 20+ features like:
+
+* `A1_Score` to `A10_Score` — screening question responses
+* `age`, `gender`, `ethnicity`, `jaundice`, `autism`, `country_of_res`, `used_app_before`, `relation`
+* **Target:** `Class/ASD` (1 = likely ASD traits, 0 = unlikely)
+
+ *Note:* The dataset is renamed as `train_data.csv` for local use.
 
 ---
 
-##  Key Insights
-- Certain behavioral questions strongly correlate with ASD diagnosis  
-- Feature selection and proper encoding significantly improved performance  
-- Model generalizes well across demographic subgroups  
+## ⚙️ Steps Performed
+
+### 1. Data Understanding & Cleaning
+
+* Handled missing values in `ethnicity` and `relation` columns.
+* Merged rare categories under “Others”.
+* Fixed inconsistent country names.
+* Dropped redundant columns (`ID`, `age_desc`).
+
+### 2. Exploratory Data Analysis (EDA)
+
+* Plotted distributions for numerical features (`age`, `result`).
+* Count plots for categorical variables.
+* Correlation heatmap to check feature relationships.
+
+### 3. Data Preprocessing
+
+* Replaced outliers using the IQR method (median imputation).
+* Encoded categorical features using Label Encoding.
+* Balanced dataset using **SMOTE (Synthetic Minority Oversampling Technique)**.
+
+### 4. Model Training
+
+Trained three baseline classifiers:
+
+* Decision Tree
+* Random Forest
+* XGBoost
+
+Used **5-Fold Cross Validation** to evaluate performance.
+
+### 5. Hyperparameter Tuning
+
+Optimized model parameters using **RandomizedSearchCV** for all three algorithms.
+Saved the best-performing model as `best_model.pkl`.
+
+### 6. Model Evaluation
+
+Evaluated on unseen test data using:
+
+* Accuracy Score
+* Confusion Matrix
+* Classification Report
 
 ---
 
-##  Future Improvements
-- Integrate explainable AI (SHAP values) to understand model reasoning  
-- Deploy model with Flask or Streamlit for interactive screening  
-- Test model on larger real-world datasets  
+## Results
+
+| Model         | Cross-Validation Accuracy |
+| ------------- | ------------------------- |
+| Decision Tree | ~88%                      |
+| Random Forest | ~92%                      |
+| XGBoost       | **~94% (Best Model)**     |
+
+The **XGBoost model** achieved the highest accuracy and was selected as the final model.
 
 ---
 
-##  Repository Contents
-| File | Description |
-|------|--------------|
-| `autism_prediction.ipynb` | Full Google Colab notebook with code, output, and explanations |
-| `train.csv` | Dataset used for training and testing the machine learning models. Contains screening responses and demographic attributes for ASD prediction. |
-| `README.md` | Project overview and documentation |
+## Files in this Repository
+
+| File                      | Description                                   |
+| ------------------------- | --------------------------------------------- |
+| `Autism_Prediction.ipynb` | Complete implementation notebook              |
+| `train_data.csv`          | Dataset (UCI Autism Screening Adult Data Set) |
+| `encoders.pkl`            | Saved label encoders                          |
+| `best_model.pkl`          | Trained best model (XGBoost)                  |
+| `README.md`               | Project documentation                         |
+
+---
+
+##  Future Work
+
+* Build a Flask web app for real-time predictions.
+* Experiment with deep learning models.
+* Add explainability using SHAP or LIME.
 
 ---
 
 ##  Author
-**Maitri Jain**  
-B.S. Data Science (IIT Madras) | B.Tech in Computer Science  
-*Project developed and executed in Google Colab for accessibility and reproducibility.*
+
+**Maitri Jain**
+B.Tech in Computer Science | IIT Madras BS in Data Science
